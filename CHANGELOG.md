@@ -1,5 +1,15 @@
 # Change Log
 
+## [1.0.1] - 2020-04-11
+
+### Changed
+
+- Extension icon
+
+### Fixed
+
+- README.md extension banners
+
 ## [1.0.0] - 2020-04-11
 
 ### Added

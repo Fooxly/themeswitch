@@ -8,9 +8,9 @@
 ext install fooxly.themeswitch
 ```
 
-[![Version](https://vsmarketplacebadge.apphb.com/version-short/fooxly.themeswitch.svg)](https://marketplace.visualstudio.com/items?itemName=fooxly.themeswitch)
-[![Installs](https://vsmarketplacebadge.apphb.com/installs-short/fooxly.themeswitch.svg)](https://marketplace.visualstudio.com/items?itemName=fooxly.themeswitch)
-[![Ratings](https://vsmarketplacebadge.apphb.com/rating-short/fooxly.themeswitch.svg)](https://marketplace.visualstudio.com/items?itemName=fooxly.themeswitch)
+[![Version](https://vsmarketplacebadge.apphb.com/version-short/Fooxly.themeswitch.svg)](https://marketplace.visualstudio.com/items?itemName=fooxly.themeswitch)
+[![Installs](https://vsmarketplacebadge.apphb.com/installs-short/Fooxly.themeswitch.svg)](https://marketplace.visualstudio.com/items?itemName=fooxly.themeswitch)
+[![Ratings](https://vsmarketplacebadge.apphb.com/rating-short/Fooxly.themeswitch.svg)](https://marketplace.visualstudio.com/items?itemName=fooxly.themeswitch)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/Fooxly/themeswitch/blob/master/LICENSE)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
