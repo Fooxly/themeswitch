@@ -22,17 +22,29 @@ export default class Main {
     this.getTheme()
     // switch to the day theme
     this.registerCommand('themeswitch.daytheme', () => {
+      if(!this.dayTheme || this.dayTheme === '') {
+        window.showInformationMessage('Your day theme is not set up!')
+        return
+      }
       this.config.update('workbench.colorTheme', this.dayTheme, true)
       this.config.update('workbench.colorCustomizations', this.dayThemeCustomizations, true)
     })
     // switch to the night theme
     this.registerCommand('themeswitch.nighttheme', () => {
+      if(!this.nightTheme || this.nightTheme === '') {
+        window.showInformationMessage('Your night theme is not set up!')
+        return
+      }
       this.config.update('workbench.colorTheme', this.nightTheme, true)
       this.config.update('workbench.colorCustomizations', this.nightThemeCustomizations, true)
     })
     // toggle between the themes
     this.registerCommand('themeswitch.toggle', () => {
       const cTheme = this.config.get('workbench.colorTheme')
+      if(!this.dayTheme || this.dayTheme === '' || !this.nightTheme || this.nightTheme === '') {
+        window.showInformationMessage('Your day and / or night theme are not set up!')
+        return
+      }
       if(cTheme === this.dayTheme) {
         this.config.update('workbench.colorTheme', this.nightTheme, true)
       } else if(cTheme === this.nightTheme) {
@@ -57,6 +69,9 @@ export default class Main {
   public configUpdate(ev: ConfigurationChangeEvent) {
     this.config = workspace.getConfiguration()
     this.getTheme()
+    if(ev.affectsConfiguration('themeswitch.priority')) {
+      this.update(true)
+    }
   }
 
   // update the statusbar item

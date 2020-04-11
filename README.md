@@ -60,9 +60,9 @@ A package by [Fooxly](https://www.fooxly.com).
 
 | property                             | type      | default               | options                | description |
 | ---                                  | ---       | ---                   | ---                    | ----        |
-| themeswitch.dayTheme                 | string    | Visual Studio Light   | -                      | The day theme |
+| themeswitch.dayTheme                 | string    | -                     | -                      | The day theme |
 | themeswitch.dayCustomizations        | object    | {}                    | -                      | The day theme color customizations |
-| themeswitch.nightTheme               | string    | Visual Studio Dark    | -                      | The night theme |
+| themeswitch.nightTheme               | string    | -                     | -                      | The night theme |
 | themeswitch.nightCustomizations      | object    | {}                    | -                      | The night theme color customizations |
 | themeswitch.toggleDefaultDark        | boolean   | true                  | true, false            | If neither day or night theme are the current theme and the toggle is triggered, switch to dark theme |
 | themeswitch.priority                 | number    | 0                     | -                      | The priority for the statubar toggle |

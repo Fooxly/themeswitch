@@ -76,8 +76,7 @@
 				},
 				"themeswitch.dayTheme": {
 					"type": "string",
-					"description": "The day theme",
-					"default": "Visual Studio Light"
+					"description": "The day theme"
 				},
 				"themeswitch.dayCustomizations": {
 					"type": "object",
@@ -86,8 +85,7 @@
 				},
 				"themeswitch.nightTheme": {
 					"type": "string",
-					"description": "The night theme",
-					"default": "Visual Studio Dark"
+					"description": "The night theme"
 				},
 				"themeswitch.nightCustomizations": {
 					"type": "object",

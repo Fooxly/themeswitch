@@ -8,3 +8,4 @@
 - Commands for selecting your day or night theme
 - Command for toggling between day and night
 - Priority option for the statusbar toggle
+- Notification for when the themes are not set up
