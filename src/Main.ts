@@ -34,7 +34,7 @@ export default class Main {
     // switch to the day theme
     this.registerCommand('themeswitch.daytheme', () => {
       if(!this.dayTheme || this.dayTheme === '') {
-        window.showInformationMessage('Your day theme is not set up!')
+        window.showInformationMessage('Your Light theme is not set up!')
         // TODO: dropdown to select a theme
         return
       }
@@ -43,7 +43,7 @@ export default class Main {
     // switch to the night theme
     this.registerCommand('themeswitch.nighttheme', () => {
       if(!this.nightTheme || this.nightTheme === '') {
-        window.showInformationMessage('Your night theme is not set up!')
+        window.showInformationMessage('Your Dark theme is not set up!')
         // TODO: dropdown to select a theme
         return
       }
@@ -53,7 +53,7 @@ export default class Main {
     this.registerCommand('themeswitch.toggle', () => {
       const cTheme = this.config.get('workbench.colorTheme')
       if(!this.dayTheme || this.dayTheme === '' || !this.nightTheme || this.nightTheme === '') {
-        window.showInformationMessage('Your day and / or night theme are not set up!')
+        window.showInformationMessage('Your Light and / or Dark theme are not set up!')
         // TODO: dropdown to select a themes
         return
       }

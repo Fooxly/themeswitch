@@ -18,9 +18,10 @@ ext install fooxly.themeswitch
 
 # 🚀 Recently Added
 
-* Switch between day and night themes
-* Switch to your day theme
-* Switch to your night theme
+* Supporting the official vscode theme preferences
+* Switch between Light and Dark themes
+* Switch to your Light theme
+* Switch to your Dark theme
 * Option to set the statusbar item priority
 
 ## ❤&nbsp; Support us
@@ -50,7 +51,8 @@ A package by [Fooxly](https://www.fooxly.com).
 
 ## 📕 Features
 
-* Switch between your day and night theme
+* Switch between your Light and Dark theme
+* Setting a new theme to your Light or Dark theme
 
 ## 💻&nbsp; Preview
 
@@ -60,8 +62,8 @@ A package by [Fooxly](https://www.fooxly.com).
 
 | property                             | type      | default               | options                | description |
 | ---                                  | ---       | ---                   | ---                    | ----        |
-| workbench.preferredLightColorTheme   | string    | Default Light+        | -                      | The light theme |
-| workbench.preferredDarkColorTheme    | string    | Default Dark+         | -                      | The dark theme |
+| workbench.preferredLightColorTheme   | string    | Default Light+        | -                      | The Light theme |
+| workbench.preferredDarkColorTheme    | string    | Default Dark+         | -                      | The Dark theme |
 | themeswitch.toggleDefaultDark        | boolean   | true                  | true, false            | If neither light or dark theme are the current theme and the toggle is triggered, switch to dark theme |
 | themeswitch.priority                 | number    | 0                     | -                      | The priority for the statubar toggle |
 
