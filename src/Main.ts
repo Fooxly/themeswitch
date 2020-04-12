@@ -62,11 +62,29 @@ export default class Main {
       } else if(cTheme === this.nightTheme) {
         this.config.update('workbench.colorTheme', this.dayTheme, true)
       } else {
-        // TODO: message that the current theme is not being used as light nor dark, option to set it to one
-        if(this.config.get('themeswitch.toggleDefaultDark', true)) {
-          this.config.update('workbench.colorTheme', this.nightTheme, true)
+        const currentTheme = this.config.get('workbench.colorTheme', undefined)
+        if (currentTheme !== undefined) {
+          window.showQuickPick([
+            'Light theme',
+            'Dark theme',
+            'Neither'
+          ], {
+            canPickMany: false,
+  
+            placeHolder: 'Your current theme is not your Light nor your Dark theme, would you like to make it one?'
+          }).then(async v => {
+            if(v !== undefined && v !== 'Neither') {
+              if(v === 'Light theme') {
+                await this.config.update('workbench.preferredLightColorTheme', currentTheme, true)
+              } else {
+                await this.config.update('workbench.preferredDarkColorTheme', currentTheme, true)
+              }
+            }
+            this.getTheme()
+            this.fallbackToTheme()
+          })
         } else {
-          this.config.update('workbench.colorTheme', this.dayTheme, true) 
+          this.fallbackToTheme()
         }
       }
     })
@@ -80,10 +98,17 @@ export default class Main {
   }
 
   public configUpdate(ev: ConfigurationChangeEvent) {
-    this.config = workspace.getConfiguration()
     this.getTheme()
     if(ev.affectsConfiguration('themeswitch.priority')) {
       this.update(true)
+    }
+  }
+
+  private fallbackToTheme() {
+    if(this.config.get('themeswitch.toggleDefaultDark', true)) {
+      this.config.update('workbench.colorTheme', this.nightTheme, true)
+    } else {
+      this.config.update('workbench.colorTheme', this.dayTheme, true) 
     }
   }
 
@@ -104,6 +129,7 @@ export default class Main {
   }
 
   private getTheme() {
+    this.config = workspace.getConfiguration()
     this.dayTheme = this.config.get('workbench.preferredLightColorTheme')
     this.nightTheme = this.config.get('workbench.preferredDarkColorTheme')
   }
