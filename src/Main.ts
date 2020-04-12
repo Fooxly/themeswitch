@@ -8,9 +8,7 @@ export default class Main {
   private config: WorkspaceConfiguration
 
   private dayTheme?: string
-  private dayThemeCustomizations?: object
   private nightTheme?: string
-  private nightThemeCustomizations?: object
 
   constructor(context: ExtensionContext) {
     this.context = context
@@ -18,31 +16,45 @@ export default class Main {
     this.Initialize()
   }
 
-  private async Initialize() {
+  private Initialize() {
+    // convert old theming settings
+    const oldLight = this.config.get('themeswitch.dayTheme')
+    if (oldLight && this.config.get('workbench.preferredLightColorTheme') !== oldLight) {
+      this.config.update('workbench.preferredLightColorTheme', oldLight, true)
+      this.config.update('themeswitch.dayTheme', undefined, true)
+    }
+    const oldDark = this.config.get('themeswitch.nightTheme')
+    if (oldDark && this.config.get('workbench.preferredDarkColorTheme') !== oldDark) {
+      this.config.update('workbench.preferredDarkColorTheme', oldDark, true)
+      this.config.update('themeswitch.nightTheme', undefined, true)
+    }
+
     this.getTheme()
+
     // switch to the day theme
     this.registerCommand('themeswitch.daytheme', () => {
       if(!this.dayTheme || this.dayTheme === '') {
         window.showInformationMessage('Your day theme is not set up!')
+        // TODO: dropdown to select a theme
         return
       }
       this.config.update('workbench.colorTheme', this.dayTheme, true)
-      this.config.update('workbench.colorCustomizations', this.dayThemeCustomizations, true)
     })
     // switch to the night theme
     this.registerCommand('themeswitch.nighttheme', () => {
       if(!this.nightTheme || this.nightTheme === '') {
         window.showInformationMessage('Your night theme is not set up!')
+        // TODO: dropdown to select a theme
         return
       }
       this.config.update('workbench.colorTheme', this.nightTheme, true)
-      this.config.update('workbench.colorCustomizations', this.nightThemeCustomizations, true)
     })
     // toggle between the themes
     this.registerCommand('themeswitch.toggle', () => {
       const cTheme = this.config.get('workbench.colorTheme')
       if(!this.dayTheme || this.dayTheme === '' || !this.nightTheme || this.nightTheme === '') {
         window.showInformationMessage('Your day and / or night theme are not set up!')
+        // TODO: dropdown to select a themes
         return
       }
       if(cTheme === this.dayTheme) {
@@ -50,6 +62,7 @@ export default class Main {
       } else if(cTheme === this.nightTheme) {
         this.config.update('workbench.colorTheme', this.dayTheme, true)
       } else {
+        // TODO: message that the current theme is not being used as light nor dark, option to set it to one
         if(this.config.get('themeswitch.toggleDefaultDark', true)) {
           this.config.update('workbench.colorTheme', this.nightTheme, true)
         } else {
@@ -91,10 +104,8 @@ export default class Main {
   }
 
   private getTheme() {
-    this.dayTheme = this.config.get('themeswitch.dayTheme')
-    this.dayThemeCustomizations = this.config.get('themeswitch.dayCustomizations')
-    this.nightTheme = this.config.get('themeswitch.nightTheme')
-    this.nightThemeCustomizations = this.config.get('themeswitch.nightCustomizations')
+    this.dayTheme = this.config.get('workbench.preferredLightColorTheme')
+    this.nightTheme = this.config.get('workbench.preferredDarkColorTheme')
   }
 
   public registerCommand(uri: string, callback: (...args: any[]) => any) {

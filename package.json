@@ -74,24 +74,6 @@
 					"description": "The priority for the statubar toggle",
 					"default": 0
 				},
-				"themeswitch.dayTheme": {
-					"type": "string",
-					"description": "The day theme"
-				},
-				"themeswitch.dayCustomizations": {
-					"type": "object",
-					"description": "The day theme color customizations",
-					"default": {}
-				},
-				"themeswitch.nightTheme": {
-					"type": "string",
-					"description": "The night theme"
-				},
-				"themeswitch.nightCustomizations": {
-					"type": "object",
-					"description": "The night theme color customizations",
-					"default": {}
-				},
 				"themeswitch.toggleDefaultDark": {
 					"type": "boolean",
 					"description": "If neither day or night theme are the current theme and the toggle is triggered, switch to dark theme",
