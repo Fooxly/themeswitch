@@ -14,7 +14,7 @@
 		"compile": "tsc -p ./ && yarn minify",
 		"minify": "uglifyjs-folder -e -x .js -o out out",
 		"watch": "tsc -watch -p ./",
-		"pack": "vsce package",
+		"vsix": "yarn compile && vsce package",
 		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
 	},
