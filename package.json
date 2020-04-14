@@ -1,24 +1,23 @@
 {
 	"name": "themeswitch",
-	"displayName": "Theme Switch",
-	"description": "Switch between your day and night themes",
-	"author": "Fooxly",
+	"version": "1.0.3",
+	"description": "Easily switch between your preferred light and dark themes",
 	"publisher": "Fooxly",
-	"license": "MIT",
+	"displayName": "Theme Switch",
 	"icon": "assets/icon.png",
-	"keywords": [
-		"fooxly",
-		"vscode",
-		"code",
-		"focus",
-		"theme",
-		"theming",
-		"switch",
-		"day",
-		"night",
-		"daynight",
-		"statusbar"
-	],
+	"main": "./out/extension.js",
+	"engines": {
+		"vscode": "^1.42.0"
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run compile",
+		"compile": "tsc -p ./ && yarn minify",
+		"minify": "uglifyjs-folder -e -x .js -o out out",
+		"watch": "tsc -watch -p ./",
+		"pack": "vsce package",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
+	},
 	"homepage": "https://github.com/Fooxly/themeswitch",
 	"repository": {
 		"type": "git",
@@ -28,13 +27,37 @@
 		"url": "https://github.com/Fooxly/themeswitch",
 		"email": "bugs@fooxly.com"
 	},
+	"keywords": [
+		"fooxly",
+		"vscode",
+		"code",
+		"focus",
+		"theme",
+		"theming",
+		"switch",
+		"toggle",
+		"simple",
+		"day",
+		"light",
+		"night",
+		"dark",
+		"daynight",
+		"statusbar"
+	],
+	"author": "Fooxly <hello@fooxly.com> (https://developer.fooxly.com)",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.11.1",
+		"tslint": "^6.1.1",
+		"typescript": "^3.8.3",
+		"uglify-js": "^3.9.0",
+		"uglifyjs-folder": "^1.5.2",
+		"vscode": "^1.1.36"
+	},
 	"galleryBanner": {
 		"color": "#FAFAFA",
 		"theme": "light"
-	},
-	"version": "1.0.2",
-	"engines": {
-		"vscode": "^1.42.0"
 	},
 	"categories": [
 		"Other"
@@ -42,20 +65,19 @@
 	"activationEvents": [
 		"*"
 	],
-	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "themeswitch.daytheme",
-				"title": "Day theme"
+				"command": "themeswitch.lighttheme",
+				"title": "Light Theme"
 			},
 			{
-				"command": "themeswitch.nighttheme",
-				"title": "Night theme"
+				"command": "themeswitch.darktheme",
+				"title": "Dark Theme"
 			},
 			{
 				"command": "themeswitch.toggle",
-				"title": "Switch theme"
+				"title": "Switch Theme"
 			}
 		],
 		"keybindings": [
@@ -81,23 +103,5 @@
 				}
 			}
 		}
-	},
-	"scripts": {
-		"vscode:prepublish": "yarn run compile",
-		"compile": "tsc -p ./ && yarn minify",
-		"minify": "uglifyjs-folder -e -x .js -o out out",
-		"watch": "tsc -watch -p ./",
-		"pack": "vsce package",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
-	},
-	"devDependencies": {
-		"@types/mocha": "^7.0.2",
-		"@types/node": "^13.11.1",
-		"tslint": "^6.1.1",
-		"typescript": "^3.8.3",
-		"uglify-js": "^3.9.0",
-		"uglifyjs-folder": "^1.5.2",
-		"vscode": "^1.1.36"
 	}
 }

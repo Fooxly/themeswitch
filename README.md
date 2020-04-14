@@ -56,19 +56,47 @@ A package by [Fooxly].
 
 <img src="https://assets.fooxly.com/extensions/themeswitch/example.gif" alt="Preview" width="500" />
 
-## 📐&nbsp; Configuration
+## ⌨️&nbsp; Keybinds
 
-| property                              | type       | default            | options         | description |
-| ---                                   | ---        | ---                | ---             | ----        |
-| `workbench.preferredLightColorTheme`  | `string`   | `"Default Light+"` | -               | Your preferred light theme |
-| `workbench.preferredDarkColorTheme`   | `string`   | `"Default Dark+"`  | -               | Your preferred dark theme |
-| `window.autoDetectColorScheme`        | `boolean`  | `false`            | -               | Instructs VS Code to listen to changes to the OS's color scheme and switch to a matching theme accordingly |
-| `themeswitch.toggleDefaultDark`       | `boolean`  | `true`             | `true`, `false` | If your preferred light/dark theme is not the current theme and the toggle is triggered, switch to your dark theme |
-| `themeswitch.priority`                | `number`   | `0`                | -               | The priority for the statusbar toggle |
+| macOS                 | Windows & Linux     | Description |
+| ---                   | ---                 | ---         |
+| Command + Option + T  | Control + Alt + T   | Toggle between your preferred light/dark themes |
+
+## 📐&nbsp; Available Settings
+
+* `workbench.preferredLightColorTheme`: Your preferred light theme (`"Default Light+"` by default)
+
+  ```json
+  "workbench.preferredLightColorTheme": <string>
+  ```
+
+* `workbench.preferredDarkColorTheme`: Your preferred dark theme (`"Default Dark+"` by default)
+
+  ```json
+  "workbench.preferredDarkColorTheme": <string>
+  ```
+
+* `window.autoDetectColorScheme`: Instructs VS Code to listen to changes to the OS's color scheme and switch to a matching theme accordingly (`false` by default)
+
+  ```json
+  "window.autoDetectColorScheme": <true|false>
+  ```
+
+* `themeswitch.toggleDefaultDark`: If your preferred light/dark theme is not the current theme and the toggle is triggered, switch to your dark theme (`true` by default)
+
+  ```json
+  "themeswitch.toggleDefaultDark": <true|false>
+  ```
+
+* `themeswitch.priority`: The priority for the statusbar toggle (`0` by default)
+
+  ```json
+  "themeswitch.priority": <number>
+  ```
 
 ## License
 
-[MIT](https://github.com/Fooxly/themeswitch/blob/master/LICENSE) &copy; [Fooxly]
+[MIT](https://github.com/Fooxly/themeswitch/blob/master/LICENSE) &copy; 2020 [Fooxly]
 
 [Fooxly]: https://www.fooxly.com
 [Day Night Theme Switcher]: https://marketplace.visualstudio.com/items?itemName=freetonik.day-night-theme-switcher

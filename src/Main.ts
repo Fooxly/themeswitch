@@ -1,124 +1,132 @@
-import { Disposable, ExtensionContext, commands, workspace, window, StatusBarAlignment, StatusBarItem, ConfigurationTarget, ThemeColor, ConfigurationChangeEvent, WorkspaceConfiguration, Uri } from 'vscode'
+import {
+  window,
+  commands,
+  workspace,
+  ExtensionContext,
+  StatusBarItem,
+  StatusBarAlignment,
+  WorkspaceConfiguration,
+  ConfigurationChangeEvent
+} from 'vscode'
 
 export default class Main {
   public context: ExtensionContext
-  private cmds: Map<string, Disposable> = new Map<string, Disposable>()
 
   private switch?: StatusBarItem
   private config: WorkspaceConfiguration
 
-  private dayTheme?: string
-  private nightTheme?: string
+  private darkTheme?: string
+  private lightTheme?: string
 
-  constructor(context: ExtensionContext) {
+  constructor (context: ExtensionContext) {
     this.context = context
     this.config = workspace.getConfiguration()
     this.Initialize()
   }
 
-  private Initialize() {
+  private Initialize () {
     // convert old theming settings
-    const oldLight = this.config.get('themeswitch.dayTheme')
-    if (oldLight && this.config.get('workbench.preferredLightColorTheme') !== oldLight) {
-      this.config.update('workbench.preferredLightColorTheme', oldLight, true)
-      this.config.update('themeswitch.dayTheme', undefined, true)
-    }
     const oldDark = this.config.get('themeswitch.nightTheme')
     if (oldDark && this.config.get('workbench.preferredDarkColorTheme') !== oldDark) {
       this.config.update('workbench.preferredDarkColorTheme', oldDark, true)
       this.config.update('themeswitch.nightTheme', undefined, true)
     }
+    const oldLight = this.config.get('themeswitch.dayTheme')
+    if (oldLight && this.config.get('workbench.preferredLightColorTheme') !== oldLight) {
+      this.config.update('workbench.preferredLightColorTheme', oldLight, true)
+      this.config.update('themeswitch.dayTheme', undefined, true)
+    }
 
     this.getTheme()
 
-    // switch to the day theme
-    this.registerCommand('themeswitch.daytheme', () => {
-      if(!this.dayTheme || this.dayTheme === '') {
-        window.showInformationMessage('Your Light theme is not set up!')
+    // switch to the dark theme
+    this.registerCommand('themeswitch.darktheme', () => {
+      if (!this.darkTheme) {
         // TODO: dropdown to select a theme
-        return
+        return window.showInformationMessage('You have not yet selected a preferred dark theme.')
       }
-      this.config.update('workbench.colorTheme', this.dayTheme, true)
+
+      this.config.update('workbench.colorTheme', this.darkTheme, true)
     })
-    // switch to the night theme
-    this.registerCommand('themeswitch.nighttheme', () => {
-      if(!this.nightTheme || this.nightTheme === '') {
-        window.showInformationMessage('Your Dark theme is not set up!')
+
+    // switch to the light theme
+    this.registerCommand('themeswitch.lighttheme', () => {
+      if (!this.lightTheme) {
         // TODO: dropdown to select a theme
-        return
+        return window.showInformationMessage('You have not yet selected a preferred light theme.')
       }
-      this.config.update('workbench.colorTheme', this.nightTheme, true)
+
+      this.config.update('workbench.colorTheme', this.lightTheme, true)
     })
+
     // toggle between the themes
     this.registerCommand('themeswitch.toggle', () => {
-      const cTheme = this.config.get('workbench.colorTheme')
-      if(!this.dayTheme || this.dayTheme === '' || !this.nightTheme || this.nightTheme === '') {
-        window.showInformationMessage('Your Light and / or Dark theme are not set up!')
-        // TODO: dropdown to select a themes
-        return
+      if (!this.lightTheme || !this.darkTheme) {
+        // TODO: dropdown to select a theme
+        return window.showInformationMessage('You have not yet selected a preferred light and/or dark theme.')
       }
-      if(cTheme === this.dayTheme) {
-        this.config.update('workbench.colorTheme', this.nightTheme, true)
-      } else if(cTheme === this.nightTheme) {
-        this.config.update('workbench.colorTheme', this.dayTheme, true)
-      } else {
-        const currentTheme = this.config.get('workbench.colorTheme', undefined)
-        if (currentTheme !== undefined) {
+
+      const colorTheme = this.config.get('workbench.colorTheme')
+      if (!colorTheme) return this.fallbackToTheme()
+
+      switch (colorTheme) {
+        case this.darkTheme: {
+          this.config.update('workbench.colorTheme', this.lightTheme, true)
+          break
+        }
+        case this.lightTheme: {
+          this.config.update('workbench.colorTheme', this.darkTheme, true)
+          break
+        }
+        default: {
           window.showQuickPick([
-            'Light theme',
-            'Dark theme',
+            'Dark Theme',
+            'Light Theme',
             'Neither'
           ], {
             canPickMany: false,
-  
-            placeHolder: 'Your current theme is not your Light nor your Dark theme, would you like to make it one?'
+            placeHolder: 'The theme you are currently using is not your preferred light or dark theme, would you like to make it one?'
           }).then(async v => {
-            if(v !== undefined && v !== 'Neither') {
-              if(v === 'Light theme') {
-                await this.config.update('workbench.preferredLightColorTheme', currentTheme, true)
-              } else {
-                await this.config.update('workbench.preferredDarkColorTheme', currentTheme, true)
+            switch (v) {
+              case 'Dark Theme': {
+                await this.config.update('workbench.preferredDarkColorTheme', colorTheme, true)
+                break
+              }
+              case 'Light Theme': {
+                await this.config.update('workbench.preferredLightColorTheme', colorTheme, true)
+                break
               }
             }
+
             this.getTheme()
             this.fallbackToTheme()
           })
-        } else {
-          this.fallbackToTheme()
         }
       }
     })
+
     this.update()
   }
 
   public destroy () {
-    if(this.switch) {
-      this.switch.dispose()
-    }
+    this.switch?.dispose?.()
   }
 
-  public configUpdate(ev: ConfigurationChangeEvent) {
+  public configUpdate (ev: ConfigurationChangeEvent) {
     this.getTheme()
-    if(ev.affectsConfiguration('themeswitch.priority')) {
-      this.update(true)
-    }
+    ev.affectsConfiguration('themeswitch.priority') && this.update(true)
   }
 
-  private fallbackToTheme() {
-    if(this.config.get('themeswitch.toggleDefaultDark', true)) {
-      this.config.update('workbench.colorTheme', this.nightTheme, true)
-    } else {
-      this.config.update('workbench.colorTheme', this.dayTheme, true) 
-    }
+  private fallbackToTheme () {
+    const theme = this.config.get('themeswitch.toggleDefaultDark', true) ? this.darkTheme : this.lightTheme
+    this.config.update('workbench.colorTheme', theme, true)
   }
 
   // update the statusbar item
-  private update(force = false) {
+  private update (force = false) {
     // create the switch if it does not already exist
     if (this.switch === undefined || force) {
-      if(this.switch) {
-        this.switch.dispose()
-      }
+      this.switch?.dispose?.()
       this.switch = window.createStatusBarItem(StatusBarAlignment.Right, this.config.get('themeswitch.priority', 0))
       this.switch.command = 'themeswitch.toggle'
       this.switch.text = '$(color-mode)'
@@ -128,14 +136,13 @@ export default class Main {
     this.switch.show()
   }
 
-  private getTheme() {
+  private getTheme () {
     this.config = workspace.getConfiguration()
-    this.dayTheme = this.config.get('workbench.preferredLightColorTheme')
-    this.nightTheme = this.config.get('workbench.preferredDarkColorTheme')
+    this.darkTheme = this.config.get('workbench.preferredDarkColorTheme')
+    this.lightTheme = this.config.get('workbench.preferredLightColorTheme')
   }
 
-  public registerCommand(uri: string, callback: (...args: any[]) => any) {
-    let dis = commands.registerCommand(uri, callback)  
-    this.context.subscriptions.push(dis)
+  public registerCommand (uri: string, callback: (...args: any[]) => any) {
+    this.context.subscriptions.push(commands.registerCommand(uri, callback))
   }
 }
