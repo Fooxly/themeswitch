@@ -14,14 +14,12 @@ ext install fooxly.themeswitch
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/Fooxly/themeswitch/blob/master/LICENSE)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-> This extension is based on [Day Night Theme Switcher](https://marketplace.visualstudio.com/items?itemName=freetonik.day-night-theme-switcher) by freetonik
+> This extension is based on [Day Night Theme Switcher] by freetonik
 
-# 🚀 Recently Added
+# 🚀&nbsp; Recently Added
 
-* Supporting the official vscode theme preferences
-* Switch between Light and Dark themes
-* Switch to your Light theme
-* Switch to your Dark theme
+* Support for the Official VS Code theme preferences
+* Easily switch to/between your preferred light/dark themes
 * Option to set the statusbar item priority
 
 ## ❤&nbsp; Support us
@@ -42,31 +40,35 @@ ext install fooxly.themeswitch
 
 <br/>
 
-# 🔍 Theme Switch
+# ☀️&nbsp; Theme Switch
 
-`Theme Switch` provides a simple way to switch between your day and night themes with a single click.
+`Theme Switch` provides a simple way to switch between your preferred light and dark theme with a single click.
 
-A package by [Fooxly](https://www.fooxly.com).
-> Based on [Day Night Theme Switcher](https://marketplace.visualstudio.com/items?itemName=freetonik.day-night-theme-switcher) by freetonik.
+A package by [Fooxly].
+> Based on [Day Night Theme Switcher] by freetonik.
 
-## 📕 Features
+## 📕&nbsp; Features
 
-* Switch between your Light and Dark theme
-* Setting a new theme to your Light or Dark theme
+* Switch between your preferred light/dark themes
+* Easily set a new theme as your default light/dark theme
 
 ## 💻&nbsp; Preview
 
-<img src="https://assets.fooxly.com/extensions/themeswitch/example.gif" alt="Preview" width="400" />
+<img src="https://assets.fooxly.com/extensions/themeswitch/example.gif" alt="Preview" width="500" />
 
-## 📐 Configuration
+## 📐&nbsp; Configuration
 
-| property                             | type      | default               | options                | description |
-| ---                                  | ---       | ---                   | ---                    | ----        |
-| workbench.preferredLightColorTheme   | string    | Default Light+        | -                      | The Light theme |
-| workbench.preferredDarkColorTheme    | string    | Default Dark+         | -                      | The Dark theme |
-| themeswitch.toggleDefaultDark        | boolean   | true                  | true, false            | If neither light or dark theme are the current theme and the toggle is triggered, switch to dark theme |
-| themeswitch.priority                 | number    | 0                     | -                      | The priority for the statubar toggle |
+| property                              | type       | default            | options         | description |
+| ---                                   | ---        | ---                | ---             | ----        |
+| `workbench.preferredLightColorTheme`  | `string`   | `"Default Light+"` | -               | Your preferred light theme |
+| `workbench.preferredDarkColorTheme`   | `string`   | `"Default Dark+"`  | -               | Your preferred dark theme |
+| `window.autoDetectColorScheme`        | `boolean`  | `false`            | -               | Instructs VS Code to listen to changes to the OS's color scheme and switch to a matching theme accordingly |
+| `themeswitch.toggleDefaultDark`       | `boolean`  | `true`             | `true`, `false` | If your preferred light/dark theme is not the current theme and the toggle is triggered, switch to your dark theme |
+| `themeswitch.priority`                | `number`   | `0`                | -               | The priority for the statusbar toggle |
 
 ## License
 
-[MIT](https://github.com/Fooxly/themeswitch/blob/master/LICENSE) &copy; Fooxly
+[MIT](https://github.com/Fooxly/themeswitch/blob/master/LICENSE) &copy; [Fooxly]
+
+[Fooxly]: https://www.fooxly.com
+[Day Night Theme Switcher]: https://marketplace.visualstudio.com/items?itemName=freetonik.day-night-theme-switcher

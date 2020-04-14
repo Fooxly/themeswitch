@@ -71,12 +71,12 @@
 			"properties": {
 				"themeswitch.priority": {
 					"type": "number",
-					"description": "The priority for the statubar toggle",
+					"description": "The priority for the statusbar toggle",
 					"default": 0
 				},
 				"themeswitch.toggleDefaultDark": {
 					"type": "boolean",
-					"description": "If neither day or night theme are the current theme and the toggle is triggered, switch to dark theme",
+					"description": "If your preferred light/dark theme is not the current theme and the toggle is triggered, switch to your dark theme",
 					"default": true
 				}
 			}
@@ -87,15 +87,16 @@
 		"compile": "tsc -p ./ && yarn minify",
 		"minify": "uglifyjs-folder -e -x .js -o out out",
 		"watch": "tsc -watch -p ./",
+		"pack": "vsce package",
 		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
 	},
 	"devDependencies": {
 		"@types/mocha": "^7.0.2",
-		"@types/node": "^13.11.0",
+		"@types/node": "^13.11.1",
 		"tslint": "^6.1.1",
 		"typescript": "^3.8.3",
-		"uglify-js": "^3.8.1",
+		"uglify-js": "^3.9.0",
 		"uglifyjs-folder": "^1.5.2",
 		"vscode": "^1.1.36"
 	}
