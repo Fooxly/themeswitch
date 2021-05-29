@@ -3,9 +3,10 @@
 out/test/**
 src/**
 .gitignore
-*.vsix
 vsc-extension-quickstart.md
 **/tsconfig.json
 **/tslint.json
 **/*.map
 **/*.ts
+**/.DS_Store
+*.vsix

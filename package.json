@@ -1,32 +1,9 @@
 {
 	"name": "themeswitch",
-	"version": "1.0.3",
-	"description": "Easily switch between your preferred light and dark themes",
-	"publisher": "Fooxly",
 	"displayName": "Theme Switch",
-	"icon": "assets/icon.png",
-	"main": "./out/extension.js",
-	"engines": {
-		"vscode": "^1.42.0"
-	},
-	"scripts": {
-		"vscode:prepublish": "yarn run compile",
-		"compile": "tsc -p ./ && yarn minify",
-		"minify": "uglifyjs-folder -e -x .js -o out out",
-		"watch": "tsc -watch -p ./",
-		"vsix": "yarn compile && vsce package",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
-	},
-	"homepage": "https://github.com/Fooxly/themeswitch",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Fooxly/themeswitch.git"
-	},
-	"bugs": {
-		"url": "https://github.com/Fooxly/themeswitch",
-		"email": "bugs@fooxly.com"
-	},
+	"author": "Fooxly <hello@fooxly.com> (https://developer.fooxly.com)",
+	"description": "Easily switch between your preferred light and dark themes",
+	"version": "1.0.4",
 	"keywords": [
 		"fooxly",
 		"vscode",
@@ -44,17 +21,43 @@
 		"daynight",
 		"statusbar"
 	],
-	"author": "Fooxly <hello@fooxly.com> (https://developer.fooxly.com)",
-	"license": "MIT",
-	"devDependencies": {
-		"@types/mocha": "^7.0.2",
-		"@types/node": "^13.11.1",
-		"tslint": "^6.1.1",
-		"typescript": "^3.8.3",
-		"uglify-js": "^3.9.0",
-		"uglifyjs-folder": "^1.5.2",
-		"vscode": "^1.1.36"
+	"homepage": "https://github.com/Fooxly/themeswitch",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Fooxly/themeswitch.git"
 	},
+	"bugs": {
+		"url": "https://github.com/Fooxly/themeswitch",
+		"email": "bugs@fooxly.com"
+	},
+	"license": "MIT",
+	"main": "./out/extension.js",
+	"engines": {
+		"yarn": ">=1",
+		"node": ">=12",
+		"vscode": "^1.42.0"
+	},
+	"scripts": {
+		"package": "yarn run compile && vsce package --yarn -o extension.vsix",
+		"compile": "tsc -p ./ && yarn minify",
+		"minify": "uglifyjs-folder -e -x .js -o out out",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@types/mocha": "^8.2.2",
+		"@types/node": "^15.6.1",
+		"tslint": "^6.1.3",
+		"typescript": "^4.3.2",
+		"uglify-js": "^3.13.8",
+		"uglifyjs-folder": "^2.0.0",
+		"vsce": "^1.88.0",
+		"vscode": "^1.1.37"
+	},
+	"publisher": "Fooxly",
+	"icon": "assets/icon.png",
 	"galleryBanner": {
 		"color": "#FAFAFA",
 		"theme": "light"
