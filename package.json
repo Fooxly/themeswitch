@@ -3,7 +3,7 @@
 	"displayName": "Theme Switch",
 	"author": "Fooxly <hello@fooxly.com> (https://developer.fooxly.com)",
 	"description": "Easily switch between your preferred light and dark themes",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"keywords": [
 		"fooxly",
 		"vscode",
